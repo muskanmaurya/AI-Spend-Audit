@@ -39,6 +39,5 @@
 * Dealt with minor type-matching bugs (e.g., mapping user string inputs to `pricing.ts` object keys). Resolved this by standardizing inputs using `.toUpperCase()` and precise key mapping.
 
 **Plan for tomorrow:**
-* Build the UI for the Spend Input Form.
 * Implement dynamic dropdowns where selecting a specific tool strictly filters the available plans for that tool using a `TOOL_PLAN_MAP`.
 * Render the user's "Stack" dynamically based on the state.
