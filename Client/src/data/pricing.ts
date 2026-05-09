@@ -10,3 +10,4 @@ export const TOOL_PRICING = {
   WINDSURF: { free: 0, pro: 15, team: 25 } 
 };
 
+ 

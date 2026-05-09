@@ -1,8 +1,0 @@
-The 7-Day "War Plan"DayFocusGoal
-1Foundation & SetupRepo, Folder structure, Markdown files, Basic UI Shell.
-2The Brain (Engine)Coding the math/logic that calculates savings.
-3The UI (Form & Results)Building the input forms and the results dashboard.
-4Data & PersistenceLocalStorage (for reloads) and Supabase/Firebase for lead capture.
-5The "AI" & SharingIntegrating the Anthropic API and unique share URLs.
-6The "Paperwork"Writing all those .md files and conducting 3 quick interviews.
-7Polish & DeploymentTesting, CI/CD, Lighthouse audit, and final submission.

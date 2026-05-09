@@ -1,3 +1,4 @@
+// src/data/toolOptions.ts
 export const TOOL_PLAN_MAP: Record<string, string[]> = {
   "Cursor": ["Hobby", "Pro", "Business", "Enterprise"],
   "GitHub Copilot": ["Individual", "Business", "Enterprise"],
@@ -9,4 +10,4 @@ export const TOOL_PLAN_MAP: Record<string, string[]> = {
   "Windsurf": ["Free", "Pro", "Team"]
 };
 
-export const USE_CASES = ["coding", "writing", "data", "research", "mixed"];
+export const USE_CASES = ["coding", "writing", "data", "research", "mixed"] as const;

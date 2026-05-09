@@ -41,3 +41,26 @@
 **Plan for tomorrow:**
 * Implement dynamic dropdowns where selecting a specific tool strictly filters the available plans for that tool using a `TOOL_PLAN_MAP`.
 * Render the user's "Stack" dynamically based on the state.
+
+## Day 3 — 2026-05-09
+**Hours worked:** 3 hours
+
+**What I did:**
+* **Dashboard Implementation:** Developed the `AuditResults.tsx` component, transforming raw JSON data into a high-fidelity visual dashboard with a "Hero" section for aggregate savings.
+* **Conditional Rendering Logic:** Implemented a view-switching state machine in `App.tsx` to toggle between the "Input" and "Results" phases without page reloads.
+* **Stack Management Optimization:** Refactored the `useAuditManager` hook to include `removeEntry` functionality, allowing for granular control over the tool stack.
+* **UI Polish:** Applied Tailwind CSS transitions and animations (fade-in) to improve the perceived performance of the dashboard transition.
+
+**What I learned:**
+* **State Scope:** Realized the importance of defining helper functions (like `removeEntry`) within the same scope as the state setter to avoid reference errors.
+* **UX Feedback Loops:** Learned that showing an "Optimized" status for tools with $0 savings is just as important as showing savings, as it builds user trust through honesty.
+* **Conditional UI Patterns:** Practiced "early return" patterns in the main `App` component to handle different application states (Input vs. Results) cleanly.
+
+**Blockers / what I'm stuck on:**
+* Spent some time debugging a shorthand property error in the custom hook; resolved by ensuring the function was properly defined before being exported.
+* Planning the most secure way to handle the Anthropic API key—decided on using Supabase Edge Functions for the upcoming AI summary feature to keep the key out of the client-side code.
+
+**Plan for tomorrow:**
+* **Lead Capture:** Integrate the email and company data collection form at the bottom of the results page.
+* **Supabase Integration:** Set up the database client and implement the `saveAudit` logic to persist results to the backend.
+* **AI Summary:** Begin drafting the prompt for the personalized executive summary and test the Edge Function connection.

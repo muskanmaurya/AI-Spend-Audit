@@ -23,6 +23,15 @@ const [entries, setEntries] = useState<ToolUsage[]>(() => {
     setEntries([...entries, entry]);
   };
 
+  const removeEntry = (idToRemove: string) => {
+    setEntries(entries.filter(entry => entry.id !== idToRemove));
+  };
+
+  const clearAudit = () => {
+    setEntries([]); // Clears the React state (updates the screen)
+    localStorage.removeItem('audit_entries'); // Wipes the saved data from the browser
+  };
+
   const getFullAudit = () => {
 
     const results: AuditRecommendation[] = entries.map(entry => analyzeToolSpend(entry));
@@ -36,6 +45,6 @@ const [entries, setEntries] = useState<ToolUsage[]>(() => {
     };
   };
 
-  return { entries, addEntry, getFullAudit };
+  return { entries, addEntry, removeEntry, clearAudit, getFullAudit };
 };
 

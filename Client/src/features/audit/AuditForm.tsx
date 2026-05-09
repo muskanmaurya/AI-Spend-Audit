@@ -17,9 +17,9 @@ export const AuditForm = ({ onAddTool }: AuditFormProps) => {
 
   // When a user changes the tool, automatically update the available plans
   const handleToolChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const newTool = e.target.value;
-    setToolName(newTool);
-    setPlan(TOOL_PLAN_MAP[newTool][0]); // Auto-select the first plan for the new tool
+    const selectedTool = e.target.value;
+    setToolName(selectedTool);
+    setPlan(TOOL_PLAN_MAP[selectedTool][0]); // Auto-select the first plan for the new tool
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -72,8 +72,11 @@ export const AuditForm = ({ onAddTool }: AuditFormProps) => {
 
       <div className="grid grid-cols-3 gap-4 mb-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700">Monthly Spend ($)</label>
-          <input type="number" required min="0" value={monthlySpend} onChange={(e) => setMonthlySpend(Number(e.target.value))} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border" placeholder="e.g. 20" />
+          <label className="block text-sm font-medium text-gray-700">Monthly Spend</label>
+          <div className="flex items-center gap-1 mt-1">
+            <span className="text-gray-700 font-medium">$</span>
+            <input type="number" required min="0" value={monthlySpend} onChange={(e) => setMonthlySpend(Number(e.target.value))} className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border" placeholder="e.g. 20" />
+          </div>
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700">Seats</label>
