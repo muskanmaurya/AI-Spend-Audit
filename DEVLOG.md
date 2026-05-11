@@ -64,3 +64,35 @@
 * **Lead Capture:** Integrate the email and company data collection form at the bottom of the results page.
 * **Supabase Integration:** Set up the database client and implement the `saveAudit` logic to persist results to the backend.
 * **AI Summary:** Begin drafting the prompt for the personalized executive summary and test the Edge Function connection.
+
+## Day 4 — 2026-05-10
+**Hours worked:** 0
+
+**What I did:**
+* No development or review tasks performed.
+
+**What I learned:**
+* N/A
+
+**Blockers / what I'm stuck on:**
+* N/A
+
+**Plan for tomorrow:**
+* N/A
+
+---
+
+## Day 5 — 2026-05-11
+**Hours worked:** 0
+
+**What I did:**
+* No development or review tasks performed.
+
+**What I learned:**
+* N/A
+
+**Blockers / what I'm stuck on:**
+* N/A
+
+**Plan for tomorrow:**
+* Re-engage with the project to finalize the Results Dashboard and backend wiring.
