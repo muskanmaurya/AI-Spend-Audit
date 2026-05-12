@@ -1,15 +1,11 @@
 
 
-import { useState } from 'react'; // Add useState
 import { useAuditManager } from './features/audit/AuditManager';
 import { AuditForm } from './features/audit/AuditForm';
 import { AuditResults } from './features/audit/AuditResult'; // Import your new component
 
 function App() {
-  const { entries, addEntry, removeEntry, getFullAudit } = useAuditManager();
-  
-  // 1. Create a "View" state to track which page we are on
-  const [showResults, setShowResults] = useState(false);
+  const { entries, addEntry, removeEntry, clearAudit, getFullAudit, showResults, setShowResults } = useAuditManager();
 
   // 2. Wrap the view logic
   if (showResults) {
@@ -18,6 +14,7 @@ function App() {
         <div className="max-w-3xl mx-auto">
           <AuditResults 
             auditData={getFullAudit()} 
+            toolStack={entries}
             onBack={() => setShowResults(false)} 
           />
         </div>
@@ -39,7 +36,21 @@ function App() {
           </div>
 
           <div className="md:col-span-3 bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
-            <h2 className="text-2xl font-bold mb-6 text-gray-800">Your Current Stack</h2>
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-2xl font-bold text-gray-800">Your Current Stack</h2>
+              {entries.length > 0 && (
+                <button 
+                  onClick={() => {
+                    if (window.confirm('Clear all entries and reset audit?')) {
+                      clearAudit();
+                    }
+                  }} 
+                  className="text-xs uppercase tracking-widest text-gray-400 hover:text-red-500 transition font-semibold"
+                >
+                  Clear Stack
+                </button>
+              )}
+            </div>
             
             {entries.length === 0 ? (
               <div className="py-12 text-center border-2 border-dashed border-gray-100 rounded-xl">
@@ -61,6 +72,7 @@ function App() {
                     </li>
                   ))}
                 </ul>
+                
 
                 <button 
                   onClick={() => setShowResults(true)} // Toggle the view here!

@@ -4,7 +4,7 @@ import type { ToolUsage, AuditRecommendation } from '../../types/index';
 import { TOOL_PRICING } from '../../data/pricing';
 
 export const analyzeToolSpend = (usage: ToolUsage): AuditRecommendation => {
-  const { toolName, plan, monthlySpend, seats, useCase, teamSize } = usage;
+  const { toolName, plan, monthlySpend, seats, useCase, teamSize: _teamSize } = usage;
   
   // Standardize the tool name for object lookup
   const toolKey = toolName.toUpperCase().replace(/ /g, '_') as keyof typeof TOOL_PRICING;
