@@ -3,12 +3,11 @@ import type { ToolUsage, AuditRecommendation } from '../../types/index';
 import { analyzeToolSpend } from './auditEngine';
 
 export const useAuditManager = () => {
-const [entries, setEntries] = useState<ToolUsage[]>(() => {
+  const [entries, setEntries] = useState<ToolUsage[]>(() => {
     try {
       const saved = localStorage.getItem('audit_entries');
       return saved ? JSON.parse(saved) : [];
     } catch {
-      console.warn('Failed to parse stored entries, starting fresh');
       return [];
     }
   });
@@ -18,7 +17,6 @@ const [entries, setEntries] = useState<ToolUsage[]>(() => {
       const saved = localStorage.getItem('audit_showResults');
       return saved ? JSON.parse(saved) : false;
     } catch {
-      console.warn('Failed to parse stored showResults state');
       return false;
     }
   });
@@ -34,16 +32,18 @@ const [entries, setEntries] = useState<ToolUsage[]>(() => {
   }, [showResults]);
 
   const addEntry = (entry: ToolUsage) => {
-    setEntries([...entries, entry]);
+    setEntries((currentEntries) => [...currentEntries, entry]);
   };
 
   const removeEntry = (idToRemove: string) => {
-    setEntries(entries.filter(entry => entry.id !== idToRemove));
+    setEntries((currentEntries) => currentEntries.filter((entry) => entry.id !== idToRemove));
   };
 
   const clearAudit = () => {
-    setEntries([]); // Clears the React state (updates the screen)
-    localStorage.removeItem('audit_entries'); // Wipes the saved data from the browser
+    setEntries([]);
+    setShowResults(false);
+    localStorage.removeItem('audit_entries');
+    localStorage.removeItem('audit_showResults');
   };
 
   const getFullAudit = () => {
@@ -51,11 +51,20 @@ const [entries, setEntries] = useState<ToolUsage[]>(() => {
     const results: AuditRecommendation[] = entries.map(entry => analyzeToolSpend(entry));
     
     const totalMonthlySavings = results.reduce((sum, res) => sum + res.potentialSavings, 0);
+    const optimizedCount = results.filter((result) => result.potentialSavings === 0).length;
+    const optimizationScore = results.length > 0 ? Math.round((optimizedCount / results.length) * 100) : 100;
     
     return {
       results,
       totalMonthlySavings,
-      totalAnnualSavings: totalMonthlySavings * 12
+      totalAnnualSavings: totalMonthlySavings * 12,
+      savingsData: {
+        totalMonthlySavings,
+        totalAnnualSavings: totalMonthlySavings * 12,
+        optimizationScore,
+        toolCount: results.length,
+        topTool: entries[0]?.toolName ?? 'your stack',
+      }
     };
   };
 

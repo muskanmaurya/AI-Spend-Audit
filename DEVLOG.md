@@ -96,3 +96,31 @@
 
 **Plan for tomorrow:**
 * Re-engage with the project to finalize the Results Dashboard and backend wiring.
+
+## Day 6 — 2026-05-12
+**Hours worked:** 6 hours (Estimated)
+
+**What I did:**
+* **State Persistence & Management:** Finalized the `clearAudit` functionality and hardened the `localStorage` sync to handle page refreshes without losing the current "Stack" or "Results" view.
+* **Lead Capture & Data Persistence:** Built the `LeadCapture.tsx` component and successfully connected the application to **Supabase**. Audits are now persisted to a permanent database.
+* **UI Logic Hardening:** Implemented "Honesty Logic" where dashboard colors adjust based on actual savings (Gray for $0, Green for >$0) and surfaced the Credex "High Savings" banner.
+
+**What I learned:**
+* **Database Schema Design:** Learned the efficiency of using `jsonb` columns in Postgres for storing dynamic arrays like the tool stack.
+* **UX Continuity:** Understood how saving the "View State" (Input vs. Results) in local storage significantly reduces user frustration during accidental reloads.
+
+**Blockers / what I'm stuck on:**
+* Configuring Supabase Edge Functions for the Anthropic API proxy. Planning to resolve this tomorrow.
+
+**Plan for tomorrow:**
+* **AI Integration:** Securely connect to Claude-3 for the 100-word executive summary.
+* **Viral Loop:** Implement unique sharing URLs and the read-only results view.
+
+---
+
+## Final Reflection — 6 Day Sprint
+**Summary:** Over six days I built a complete audit flow that moves a user from input → deterministic audit → persistent save → secure AI summary → shareable report. The work balanced UX polish (honesty logic, badge layout, share UX) with backend safety (Edge Function proxy for Anthropic, honeypot anti-spam, Postgres caching).
+
+**Hardest Technical Challenge:** Protecting the Anthropic API key while still delivering a low-latency, cached executive summary. The solution used a Supabase Edge Function to proxy calls, check/write a cached `executive_summary` column, and avoid repeated tokenized API usage.
+
+**Next steps / Deployment:** Deploy the Supabase migrations and Edge Function with environment variables (`SUPABASE_SERVICE_ROLE_KEY`, `ANTHROPIC_API_KEY`) to enable production summary generation. Consider server-side prerendering or social-preview middleware for shareable URLs to ensure crawlers see OG meta.
